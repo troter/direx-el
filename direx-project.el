@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; 
+;;
 
 ;;; Code:
 
@@ -65,6 +65,12 @@ a project root or not."
       (error "Project root not found"))
     buffer))
 
+(defun direx-project:jump-to-project-root-or-directory-noselect ()
+  (interactive)
+  (condition-case nil
+    (direx-project:jump-to-project-root-noselect)
+    (error (direx:jump-to-directory-noselect))))
+
 ;;;###autoload
 (defun direx-project:jump-to-project-root ()
   (interactive)
@@ -74,6 +80,11 @@ a project root or not."
 (defun direx-project:jump-to-project-root-other-window ()
   (interactive)
   (switch-to-buffer-other-window (direx-project:jump-to-project-root-noselect)))
+
+;;;###autoload
+(defun direx-project:jump-to-project-root-or-directory-other-window ()
+  (interactive)
+  (switch-to-buffer-other-window (direx-project:jump-to-project-root-or-directory-noselect)))
 
 (provide 'direx-project)
 ;;; direx-project.el ends here
